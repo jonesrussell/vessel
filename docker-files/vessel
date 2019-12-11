@@ -128,6 +128,9 @@ fi
 # Create base docker-compose command to run
 COMPOSE="docker-compose"
 
+# Drush
+DRUSH="drush"
+
 # If we pass any arguments...
 if [ $# -gt 0 ]; then
 
@@ -375,6 +378,12 @@ if [ $# -gt 0 ]; then
                 $1 \
                 bash
         fi
+
+    elif [ "$1" == "drush" ]; then
+        shift 1
+        $COMPOSE run --rm \
+            app \
+            drush "$@"
 
     # Else, pass-thru args to docker-compose
     else
