@@ -1,27 +1,36 @@
 {
-    "name": "shipping-docker/vessel",
-    "description": "Simple Docker dev environments",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Chris Fidao",
-            "email": "fideloper@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Vessel\\": "src/"
-        }
-    },
-    "require": {},
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Vessel\\VesselServiceProvider"
-            ]
-        }
-    },
-    "scripts": {
-        "post-update-cmd": "echo 'VESSEL: Updates may require rebuilding your images.\nVESSEL: See https://github.com/shipping-docker/vessel/releases for details.'"
+  "name": "shipping-docker/vessel",
+  "description": "Simple Docker dev environments",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chris Fidao",
+      "email": "fideloper@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Vessel\\": "src/"
+    }
+  },
+  "require": {},
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Vessel\\VesselServiceProvider"
+      ]
+    },
+    "drupal": {
+      "source": "https://raw.githubusercontent.com/jonesrussell/vessel/drupal/docker-files/{path}",
+      "initial": {
+        "docker-files/vessel": "vessel",
+        "docker-files/docker-compose.yml": "docker-compose.yml",
+        "docker-files/docker": "docker"
+      },
+      "omit-defaults": false
+    }
+  },
+  "scripts": {
+    "post-update-cmd": "echo 'VESSEL: Updates may require rebuilding your images.\nVESSEL: See https://github.com/shipping-docker/vessel/releases for details.'"
+  }
 }
