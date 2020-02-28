@@ -37,6 +37,8 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" > /etc/apt
     && sed -i "s/pm\.max_spare_servers = .*/pm.max_spare_servers = 10/" /etc/php/7.3/fpm/pool.d/www.conf \
     && echo "daemon off;" >> /etc/nginx/nginx.conf
 
+COPY --from=drush/drush /usr/local/bin/drush /usr/local/bin/drush
+
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
