@@ -22,8 +22,9 @@ services:
       DB_PASSWORD: "${DB_PASSWORD}"
       REDIS_INTERFACE: "${REDIS_INTERFACE}"
       REDIS_HOST: "${REDIS_HOST}"
-      REDIS_AUTH: "${REDIS_AUTH}"
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
       REDIS_BASE: "${REDIS_BASE}"
+      REDIS_PORT: "${REDIS_PORT}"
       MINIO_PORT: "${MINIO_PORT}"
       MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
       MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
@@ -37,19 +38,6 @@ services:
       - mysql
       - redis
       - minio
-
-  node:
-    build:
-      context: ./docker/node
-      dockerfile: Dockerfile
-      args:
-        uid: "${WWWUSER}"
-    image: vessel/node
-    user: node
-    volumes:
-      - .:/var/www/html
-    networks:
-      - vessel
 
   mysql:
     image: mysql:5.7
@@ -68,10 +56,10 @@ services:
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - vessel
-      - messages
 
   redis:
     image: redis:alpine
+    command: redis-server --requirepass "${REDIS_PASSWORD}"
     volumes:
       - vesselredis:/data
     networks:
@@ -123,6 +111,9 @@ services:
     ports:
       - "1025"
       - "${MAILHOG_WWW_PORT}:8025"
+    networks:
+      - vessel
+      - messages
 
 networks:
   vessel:
