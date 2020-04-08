@@ -1,0 +1,34 @@
+{
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "composer-patches": {
+            "type": "vcs",
+            "url": "https://github.com/vardot/composer-patches"
+        },
+        "vessel": {
+            "type": "vcs",
+            "url": "https://github.com/jonesrussell/vessel"
+        }
+    },
+    "require-dev": {
+        "shipping-docker/vessel": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin/",
+        "secure-http": false,
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "drupal/core": "dist"
+        }
+    },
+    "extra": {
+        "enable-patching": true
+    }
+}
